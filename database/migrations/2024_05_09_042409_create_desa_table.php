@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Menambahkan kunci asing (foreign key) ke kolom 'id_kecamatan'
-            $table->foreign('id_kecamatan')->references('id')->on('tb_kecamatan')->onDelete('no action');
+            $table->foreign('id_kecamatan')->references('id')->on('tb_kecamatan');
         });
     }
 

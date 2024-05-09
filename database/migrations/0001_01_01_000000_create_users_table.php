@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('lembaga');
             $table->string('no_telp');
-            $table->unsignedBigInteger('id_jenis_user');
+            $table->unsignedBigInteger('id_jenis_users');
             $table->timestamps();
-            
+
             // Menambahkan kunci asing (foreign key) ke kolom 'id_jenis_user'
-            $table->foreign('id_jenis_user')->references('id')->on('tb_jenis_user');
+            $table->foreign('id_jenis_users')->references('id')->on('tb_jenis_users');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

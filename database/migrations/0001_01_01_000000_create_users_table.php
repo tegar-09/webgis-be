@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
@@ -20,11 +20,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('lembaga');
             $table->string('no_telp');
-            $table->unsignedBigInteger('id_jenis_users');
             $table->timestamps();
-
-            // Menambahkan kunci asing (foreign key) ke kolom 'id_jenis_user'
-            $table->foreign('id_jenis_users')->references('id')->on('tb_jenis_users');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -48,7 +44,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_users');
+        Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

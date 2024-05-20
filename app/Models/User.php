@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,14 +21,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
-        
     ];
-
-    public function kejadian (){
-        return $this->hasMany(kejadian::class);
-    }
-
-    protected $table='tb_users';
 
     /**
      * The attributes that should be hidden for serialization.

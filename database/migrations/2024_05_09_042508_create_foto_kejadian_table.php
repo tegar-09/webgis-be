@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_kejadian');
             $table->string('nama_file');
-            $table->text('deskripsi');
             $table->timestamps();
 
             // Menambahkan kunci asing (foreign key) ke kolom 'id_kejadian'
             $table->foreign('id_kejadian')->references('id')->on('tb_kejadian');
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

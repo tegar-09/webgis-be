@@ -46,4 +46,28 @@ class Kejadian extends Model
     {
         return $this->belongsTo(User::class, 'id_users');
     }
+
+    // Relasi: satu kejadian has many to banyak foto
+    public function fotoKejadian()
+    {
+        return $this->hasMany(FotoKejadian::class, 'id_kejadian');
+    }
+
+    // Relasi: satu kejadian has many to banyak foto
+    public function penanganan()
+    {
+        return $this->hasMany(Penanganan::class, 'id_kejadian');
+    }
+
+    // Relasi: satu kejadian has many to banyak foto
+    public function korban()
+    {
+        return $this->hasMany(Korban::class, 'id_kejadian');
+    }
+
+    // Relasi: satu kejadian has many to banyak foto
+    public function Keterangan()
+    {
+        return $this->hasMany(Keterangan::class, 'id_kejadian');
+    }
 }

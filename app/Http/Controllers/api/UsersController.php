@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,7 @@ class UsersController extends Controller
     {
         // Mengambil semua pengguna
         $users = User::all();
-        return response()->json($users);
+        return response()->json(['data' => $users]);
     }
 
     /**
@@ -24,6 +25,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         // Validasi data input
         $request->validate([
             'username' => 'required|string|unique:users,username',
@@ -33,6 +35,7 @@ class UsersController extends Controller
             'alamat' => 'required|string',
             'lembaga' => 'required|string',
             'no_telp' => 'required|string',
+            'role' => 'required|string|exists:roles,name', // Validasi role
         ]);
 
         // Membuat pengguna baru
@@ -47,8 +50,9 @@ class UsersController extends Controller
         ]);
 
         $user->save();
+        $user->assignRole([$request->role]);
 
-        return response()->json($user, 201);
+        return response()->json(['message' => 'User inserted successfully'], 201);
     }
 
     /**
@@ -75,6 +79,7 @@ class UsersController extends Controller
             'alamat' => 'string|nullable',
             'lembaga' => 'string|nullable',
             'no_telp' => 'string|nullable',
+            'role' => 'string|exists:roles,name|nullable', // Validasi role
         ]);
 
         // Update data pengguna
@@ -90,9 +95,13 @@ class UsersController extends Controller
         $user->lembaga = $request->lembaga ?? $user->lembaga;
         $user->no_telp = $request->no_telp ?? $user->no_telp;
 
+        if ($request->role) {
+            $user->syncRoles([$request->role]); // Sync roles to remove old roles and add new role
+        }
+
         $user->save();
 
-        return response()->json($user);
+        return response()->json(['message' => 'User updated successfully'], 200);
     }
 
     /**
@@ -104,6 +113,6 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return response()->json(null, 204);
+        return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }

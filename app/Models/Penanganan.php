@@ -23,4 +23,14 @@ class Penanganan extends Model
     {
         return $this->belongsTo(Kejadian::class, 'id_kejadian');
     }
+
+    public function korban()
+    {
+        return $this->hasOne(Korban::class, 'id_kejadian', 'id_kejadian');
+    }
+
+    public function keterangan()
+    {
+        return $this->hasOne(Keterangan::class, 'id_kejadian', 'id_kejadian');
+    }
 }

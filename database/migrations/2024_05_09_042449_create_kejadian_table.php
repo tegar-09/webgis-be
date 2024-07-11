@@ -35,7 +35,7 @@ return new class extends Migration
             $table->foreign('id_desa')->references('id')->on('tb_desa');
             
             // Menambahkan kunci asing (foreign key) ke kolom 'id_users'
-            $table->foreign('id_users')->references('id')->on('tb_users');
+            $table->foreign('id_users')->references('id')->on('users');
         });
     }
 

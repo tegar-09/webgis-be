@@ -14,8 +14,8 @@ class DesaController extends Controller
     public function index()
     {
         // Mengambil semua data desa
-        $desas = Desa::all();
-        return response()->json($desas);
+        $desa = Desa::all();
+        return response()->json($desa);
     }
 
     /**
